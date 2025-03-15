@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>红客联盟 - SMS 轰炸器</title>
+    <style>
+        /* 页面基础样式 */
+        body {
+            margin: 0;
+            padding: 0;
+            background: black;
+            color: #0f0;
+            font-family: Consolas, monospace;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        /* 顶部 Logo */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .logo-container img {
+            height: 50px; /* 控制图片大小 */
+            margin-right: 10px;
+        }
+        .logo-container span {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* 水滴滚动背景 */
+        .hacker-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://media.giphy.com/media/VbnUQpnihPSIgIXuZv/giphy.gif') repeat;
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        /* 许可密钥输入框 */
+        .auth-container {
+            margin-top: 50px;
+        }
+        .input-line {
+            border: none;
+            border-bottom: 2px solid #0f0;
+            background: transparent;
+            color: #0f0;
+            font-size: 20px;
+            width: 250px;
+            text-align: center;
+            outline: none;
+        }
+        .input-line::placeholder {
+            color: rgba(0, 255, 0, 0.5);
+        }
+
+        /* 隐藏内容区域 */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 背景动画 -->
+    <div class="hacker-bg"></div>
+
+    <!-- 顶部 Logo -->
+    <div class="logo-container">
+        <img src="img/1.jpg" alt="红客联盟 Logo">  <!-- 确保 GitHub Pages 可访问 -->
+        <span>红客联盟</span>
+    </div>
+
+    <!-- 许可密钥输入 -->
+    <div class="auth-container">
+        <p>请输入许可密钥：</p>
+        <input type="text" id="auth-key" class="input-line" placeholder="******">
+        <button onclick="checkKey()">确认</button>
+    </div>
+
+    <!-- 主内容（默认隐藏） -->
+    <div id="main-content" class="hidden">
+        <h2>SMS 轰炸工具</h2>
+        <p>请输入你要轰炸的 SMS 号：</p>
+        <input type="text" id="sms-number" class="input-line" placeholder="请输入号码">
+        <button onclick="startAttack()">开始轰炸</button>
+    </div>
+
+    <script>
+        function checkKey() {
+            let key = document.getElementById("auth-key").value;
+            if (key === "H4ck3r_2025") {  // 预设的密钥
+                document.querySelector(".auth-container").style.display = "none";
+                document.getElementById("main-content").classList.remove("hidden");
+            } else {
+                alert("你无权访问该高机密文件");
+                location.reload();
+            }
+        }
+
+        function startAttack() {
+            let number = document.getElementById("sms-number").value;
+            if (number !== "班主任的手机号") {
+                alert("终端未记录此码");
+            } else {
+                alert("本网站不承担任何法律责任，请确保你的正确使用");
+                fakeDarknetQuery();
+            }
+        }
+
+        function fakeDarknetQuery() {
+            let mainContent = document.getElementById("main-content");
+            mainContent.innerHTML = "<p>暗网数据库正在解析此号码...</p>";
+
+            setTimeout(() => {
+                mainContent.innerHTML = "<p>解析成功！</p><p>姓名：XXX<br>手机号：XXX-XXXX-XXXX<br>余额：¥32,879.45</p>";
+                mainContent.innerHTML += '<button onclick="fakeBombing()">继续</button>';
+            }, 5000);
+        }
+
+        function fakeBombing() {
+            let mainContent = document.getElementById("main-content");
+            mainContent.innerHTML = "<p>正在准备短信轰炸...</p>";
+
+            setTimeout(() => {
+                mainContent.innerHTML = "<p>已开始强力轰炸！</p>";
+                navigator.vibrate([500, 300, 500]);  // 让手机震动
+            }, 5000);
+        }
+    </script>
+
+</body>
+</html>
